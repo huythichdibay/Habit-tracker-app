@@ -8,25 +8,25 @@
     <fragment
         android:id="@+id/dashboardFragment"
         android:name="com.example.habittrackerapp.fragments.DashboardFragment"
-        android:label="fragment_dashboard"
+        android:label="Dashboard"
         tools:layout="@layout/fragment_dashboard" />
 
     <fragment
         android:id="@+id/statsFragment"
         android:name="com.example.habittrackerapp.fragments.StatsFragment"
-        android:label="fragment_stats"
+        android:label="Statistics"
         tools:layout="@layout/fragment_stats" />
 
     <fragment
         android:id="@+id/allHabitsFragment"
         android:name="com.example.habittrackerapp.fragments.AllHabitsFragment"
-        android:label="fragment_all_habits"
+        android:label="All Habits"
         tools:layout="@layout/fragment_all_habits" />
 
     <fragment
         android:id="@+id/settingsFragment"
         android:name="com.example.habittrackerapp.fragments.SettingsFragment"
-        android:label="fragment_settings"
+        android:label="Settings"
         tools:layout="@layout/fragment_settings" />
 
 </navigation>
