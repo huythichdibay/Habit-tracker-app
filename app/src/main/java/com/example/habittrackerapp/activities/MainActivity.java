@@ -1,8 +1,10 @@
-package com.example.habittrackerapp;
+package com.example.habittrackerapp.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.example.habittrackerapp.R;
 
 public class MainActivity extends AppCompatActivity {
 
