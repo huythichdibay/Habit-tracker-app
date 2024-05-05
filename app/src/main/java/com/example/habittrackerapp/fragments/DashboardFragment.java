@@ -3,12 +3,21 @@ package com.example.habittrackerapp.fragments;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.habittrackerapp.R;
+import com.example.habittrackerapp.recyclerViews.datePicker.DatePickerAdapter;
+import com.example.habittrackerapp.ultilities.DateUltilities;
+
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -60,7 +69,20 @@ public class DashboardFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_dashboard, container, false);
+
+        //wallet recycler view
+        RecyclerView walletListRV = view.findViewById(R.id.date_picker);
+
+        List<Date> dateList = DateUltilities.GetDateListOf2RecentWeek();
+
+        LinearLayoutManager linearLayoutManager =
+                new LinearLayoutManager(this.getContext(), LinearLayoutManager.HORIZONTAL, false);
+
+        walletListRV.setLayoutManager(linearLayoutManager);
+        walletListRV.setAdapter(new DatePickerAdapter( dateList));
+
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_dashboard, container, false);
+        return view;
     }
 }
