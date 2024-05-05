@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@id/dashboardFragment">
+
+    <fragment
+        android:id="@+id/dashboardFragment"
+        android:name=""
+        android:label="fragment_dashboard"
+        tools:layout="" />
+
+    <fragment
+        android:id="@+id/statsFragment"
+        android:name=""
+        android:label="fragment_stats"
+        tools:layout="" />
+
+    <fragment
+        android:id="@+id/allHabitsFragment"
+        android:name=""
+        android:label="fragment_all_habits"
+        tools:layout="" />
+
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name=""
+        android:label="fragment_settings"
+        tools:layout="" />
+
+</navigation>

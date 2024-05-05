@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/dashboardFragment"
+        android:icon="@drawable/baseline_home_24"
+        android:title="@string/title_dashboard" />
+    <item
+        android:id="@+id/allHabitsFragment"
+        android:icon="@drawable/baseline_all_24"
+        android:title="@string/title_all_habits" />
+    <item
+        android:id="@+id/statsFragment"
+        android:icon="@drawable/baseline_stats_24"
+        android:title="@string/title_stats" />
+    <item
+        android:id="@+id/settingsFragment"
+        android:icon="@drawable/baseline_account_circle_24"
+        android:title="@string/title_settings" />
+
+</menu>

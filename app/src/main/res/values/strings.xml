@@ -1,3 +1,7 @@
 <resources>
-    <string name="app_name">HabitTrackerApp</string>
+    <string name="app_name">MoneyLoverApp</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_all_habits">All Habits</string>
+    <string name="title_stats">Stats</string>
+    <string name="title_settings">Settings</string>
 </resources>
