@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:paddingRight="12dp"
+    android:paddingLeft="8dp"
+    android:background="@drawable/round_button"
+    android:layout_marginTop="5dp"
+    android:layout_marginEnd="5dp">
+
+<!--    image-->
+    <ImageView
+        android:id="@+id/habit_image"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginRight="15dp"
+        android:layout_centerVertical="true"/>
+<!--    habit-->
+    <RelativeLayout
+        android:id="@+id/habit_info"
+        android:layout_width="300dp"
+        android:layout_height="48dp"
+        android:layout_toRightOf="@+id/habit_image">
+
+        <!--        habit name-->
+        <TextView
+            android:id="@+id/habit_name"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:textStyle="bold"
+            android:text="Drink water"
+            android:textSize="18sp"/>
+
+        <!--        habit status-->
+        <TextView
+            android:id="@+id/habit_status"
+            android:layout_width="match_parent"
+            android:layout_height="18dp"
+            android:layout_below="@+id/habit_name"
+            android:textStyle="bold"
+            android:text="X Overdue"
+            android:textSize="12sp"/>
+
+    </RelativeLayout>
+
+<!--    habit progress-->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:layout_toRightOf="@+id/habit_info"
+        android:text="1/5"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:layout_centerVertical="true"/>
+</RelativeLayout>

@@ -1,13 +1,115 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingRight="15dp"
+    android:paddingLeft="15dp"
+    android:paddingTop="8dp"
     tools:context=".fragments.DashboardFragment">
+
+    <RelativeLayout
+        android:id="@+id/dashboard_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp">
+        <TextView
+            android:id="@+id/dashboard_header_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:gravity="center"
+            android:layout_centerVertical="true"
+            android:text="Today"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:textSize="28sp"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_alignParentRight="true"
+            android:gravity="center"
+            android:layout_centerVertical="true"
+            android:background="@drawable/round_button"
+            android:text="TODAY"
+            android:textSize="15sp"
+            android:padding="0dp" />
+    </RelativeLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/date_picker"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/dashboard_header"/>
 
-</FrameLayout>
+    <TextView
+        android:id="@+id/any_time_habits_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:textSize="15dp"
+        android:text="DO ANYTIME"
+        android:textStyle="bold"
+        android:layout_below="@+id/date_picker"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/do_anytime_habits"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/any_time_habits_title"/>
+
+    <TextView
+        android:id="@+id/morning_habits_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:textSize="15dp"
+        android:text="MORNING"
+        android:textStyle="bold"
+        android:layout_below="@+id/do_anytime_habits"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/morning_habits"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/morning_habits_title"/>
+
+    <TextView
+        android:id="@+id/afternoon_habits_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:textSize="15dp"
+        android:text="AFTERNOON"
+        android:textStyle="bold"
+        android:layout_below="@+id/morning_habits"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/afternoon_habits"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/afternoon_habits_title"/>
+
+    <TextView
+        android:id="@+id/evening_habits_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:textSize="15dp"
+        android:text="AFTERNOON"
+        android:textStyle="bold"
+        android:layout_below="@+id/afternoon_habits"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/evening_habits"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/evening_habits_title"/>
+
+</RelativeLayout>
