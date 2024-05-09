@@ -102,7 +102,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         android:textSize="15dp"
-        android:text="AFTERNOON"
+        android:text="EVENING"
         android:textStyle="bold"
         android:layout_below="@+id/afternoon_habits"/>
 

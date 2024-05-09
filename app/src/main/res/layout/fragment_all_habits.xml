@@ -1,14 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragments.AllHabitsFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+<!--    morning habits container-->
+    <RelativeLayout
+        android:id="@+id/morning_habit_container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent">
 
-</FrameLayout>
+<!--        header-->
+        
+<!--        main content-->
+
+    </RelativeLayout>
+
+<!--    afternoon habits container-->
+    <RelativeLayout
+        android:id="@+id/afternoon_habit_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/morning_habit_container">
+
+        <!--        header-->
+
+        <!--        main content-->
+
+    </RelativeLayout>
+
+<!--    evening habits container-->
+    <RelativeLayout
+        android:id="@+id/evening_habit_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/afternoon_habit_container">
+
+        <!--        header-->
+
+        <!--        main content-->
+
+    </RelativeLayout>
+
+<!--    any time habits container-->
+    <RelativeLayout
+        android:id="@+id/anytime_habit_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/evening_habit_container">
+
+        <!--        header-->
+
+        <!--        main content-->
+
+    </RelativeLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
