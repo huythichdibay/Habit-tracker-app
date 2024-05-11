@@ -3,16 +3,23 @@ package com.example.habittrackerapp.models;
 import java.util.Date;
 
 public class HabitRecord {
+    int Id;
     int HabitId;
     Date Date;
     String Status; // Overdue, Done, Not Yet, In Progress
     int Goal; //so lan lam duoc
+    int TimeInDay; //1 morning, 2 afternoon, 3 evening
 
-    public HabitRecord(int habitId, java.util.Date date, String status, int goal) {
+    public HabitRecord() {
+    }
+
+    public HabitRecord(int id, int habitId, java.util.Date date, String status, int goal, int timeInDay) {
+        Id = id;
         HabitId = habitId;
         Date = date;
         Status = status;
         Goal = goal;
+        TimeInDay = timeInDay;
     }
 
     public int getHabitId() {
@@ -23,11 +30,11 @@ public class HabitRecord {
         HabitId = habitId;
     }
 
-    public java.util.Date getDate() {
+    public Date getDate() {
         return Date;
     }
 
-    public void setDate(java.util.Date date) {
+    public void setDate(Date date) {
         Date = date;
     }
 
@@ -45,5 +52,21 @@ public class HabitRecord {
 
     public void setGoal(int goal) {
         Goal = goal;
+    }
+
+    public int getId() {
+        return Id;
+    }
+
+    public void setId(int id) {
+        Id = id;
+    }
+
+    public int getTimeInDay() {
+        return TimeInDay;
+    }
+
+    public void setTimeInDay(int timeInDay) {
+        TimeInDay = timeInDay;
     }
 }

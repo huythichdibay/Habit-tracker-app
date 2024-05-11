@@ -7,7 +7,6 @@ public class Habit {
     String Name;
     Date StartDate;
     Date EndDate;
-    String Description;
     int Type; //1 -> daily, 2 -> weekly, 3 -> monthly, 0 -> one time task
     int Goal;
     int GoalType; // 1. goal by times(so lan thuc hien), 2. Time (tgian thuc hien theo phut)
@@ -20,14 +19,13 @@ public class Habit {
 
     public Habit(
             int id, String name,
-            Date startDate, Date endDate, String description, int type,
+            Date startDate, Date endDate, int type,
             int goal, int goalType, int goalAmount,
             int status, int repeatedDaily) {
         Id = id;
         Name = name;
         StartDate = startDate;
         EndDate = endDate;
-        Description = description;
         Type = type;
         Goal = goal;
         GoalType = goalType;
@@ -66,14 +64,6 @@ public class Habit {
 
     public void setEndDate(Date endDate) {
         EndDate = endDate;
-    }
-
-    public String getDescription() {
-        return Description;
-    }
-
-    public void setDescription(String description) {
-        Description = description;
     }
 
     public int getType() {

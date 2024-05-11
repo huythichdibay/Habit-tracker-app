@@ -11,13 +11,14 @@ public class WeeklyHabit extends Habit{
     public WeeklyHabit(
             int id, String name,
             Date startDate, Date endDate,
-            String description, int type,
+            int type,
             int goal, int goalType, int goalAmount,
             int status, int repeatedDaily,
             int daysPerWeek) {
         super(
-                id, name, startDate,
-                endDate, description, type,
+                id, name,
+                startDate, endDate,
+                type,
                 goal, goalType, goalAmount,
                 status, repeatedDaily);
         DaysPerWeek = daysPerWeek;

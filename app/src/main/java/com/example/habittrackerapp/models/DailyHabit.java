@@ -11,13 +11,13 @@ public class DailyHabit extends Habit{
     public DailyHabit(
             int id, String name,
             Date startDate, Date endDate,
-            String description, int type,
+            int type,
             int goal, int goalType, int goalAmount,
             int status, int repeatedDaily,
             String days) {
         super(
                 id, name, startDate,
-                endDate, description, type,
+                endDate, type,
                 goal, goalType, goalAmount,
                 status, repeatedDaily);
         Days = days;
