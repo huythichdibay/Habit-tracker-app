@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">habitTrackerApp</string>
+    <string name="app_name">Productive</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_all_habits">All Habits</string>
     <string name="title_stats">Stats</string>
