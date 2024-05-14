@@ -12,13 +12,18 @@ import com.example.habittrackerapp.ultilities.DateUltilities;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
+
+import kotlinx.coroutines.selects.WhileSelectKt;
 
 public class HabitDao {
     private SQLiteDatabase db;
+    HabitRecordDao habitRecordDao;
     public HabitDao (Context context) {
         DatabaseHandler dbHandler = new DatabaseHandler (context);
         db = dbHandler.getWritableDatabase();
+        habitRecordDao = new HabitRecordDao(context);
     }
 
     @SuppressLint("Range")
@@ -95,13 +100,44 @@ public class HabitDao {
         return GetData(sql);
     }
 
+    public List<Habit> GetOneTimeTaskByDate(Date date){
+        List<Habit> list = GetAllOneTimeTask();
+
+        Iterator<Habit> iterator = list.iterator();
+        while (iterator.hasNext()){
+            if(!habitRecordDao.IsHabitHaveRecord(iterator.next().getId(), date)){
+                iterator.remove();
+            }
+        }
+
+        return list;
+    }
+
     public List<Habit> GetDoneOneTimeTask(){
-        String sql = "SELECT * FROM Habits WHERE Type = 0 AND ";
-        return GetData(sql);
+        String sql = "SELECT * FROM Habits WHERE Type = 0 ";
+
+        List<Habit> oneTimeTasks = GetData(sql);
+        List<Habit> result = new ArrayList<>();
+        for (Habit h : oneTimeTasks) {
+            if(!habitRecordDao.IsOneTimeTaskOverdue(h.getId())){
+                result.add(h);
+            }
+        }
+
+        return result;
     }
 
     public List<Habit> GetOverdueOneTimeTask(){
-        String sql = "SELECT * FROM Habits WHERE Type = 0";
-        return GetData(sql);
+        String sql = "SELECT * FROM Habits WHERE Type = 0 ";
+
+        List<Habit> oneTimeTasks = GetData(sql);
+        List<Habit> result = new ArrayList<>();
+        for (Habit h : oneTimeTasks) {
+            if(habitRecordDao.IsOneTimeTaskOverdue(h.getId())){
+                result.add(h);
+            }
+        }
+
+        return result;
     }
 }

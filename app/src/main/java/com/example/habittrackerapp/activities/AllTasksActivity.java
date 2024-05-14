@@ -34,7 +34,8 @@ public class AllTasksActivity extends AppCompatActivity {
 
         habitDao = new HabitDao(getApplicationContext());
 
-        getAnyTimeHabitsRV();
+        getDoneTaskRV();
+        getNotDoneTaskRV();
 
         findViewById(R.id.task_exit_btn).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -45,9 +46,13 @@ public class AllTasksActivity extends AppCompatActivity {
         });
     }
 
-
-    private void getAnyTimeHabitsRV() {
+    private void getNotDoneTaskRV() {
         tasksRV.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-        tasksRV.setAdapter(new HabitListAdapter(habitDao.GetAllOneTimeTask(), getApplicationContext(), this));
+        tasksRV.setAdapter(new HabitListAdapter(habitDao.GetOverdueOneTimeTask(), getApplicationContext(), this));
+    }
+
+    private void getDoneTaskRV() {
+        tasksRV.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+        tasksRV.setAdapter(new HabitListAdapter(habitDao.GetDoneOneTimeTask(), getApplicationContext(), this));
     }
 }

@@ -1,5 +1,8 @@
 package com.example.habittrackerapp.interfaces;
 
+
+import java.util.Date;
+
 public interface OnDateClickListener {
-    void onItemClick(int position);
+    void onItemClick(Date item);
 }

@@ -12,6 +12,7 @@ import com.example.habittrackerapp.ultilities.DateUltilities;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 public class HabitRecordDao {
@@ -50,10 +51,33 @@ public class HabitRecordDao {
         List<HabitRecord> records = GetByHabitId(habitId);
 
         for (HabitRecord hc: records) {
-            if(hc.getDate() == date){
+            if(DateUltilities.isSameDay(hc.getDate(), date)){
                 return true;
             }
         }
         return false;
+    }
+
+    public boolean IsOneTimeTaskOverdue(int HabitId){
+        List<HabitRecord> h = GetData("SELECT * FROM HabitRecords WHERE HabitId = ?", new String[]{HabitId+""});
+        if(h == null || h.size() == 0){
+            return true;
+        }
+        else{
+            return h.get(0).getStatus() == "Overdue";
+        }
+    }
+
+    public List<HabitRecord> GetRecordByHabitIdAndDate(int habitId, Date date){
+        List<HabitRecord> h = GetData("SELECT * FROM HabitRecords WHERE HabitId = ?", new String[]{habitId+""});
+
+        Iterator<HabitRecord> iterator = h.iterator();
+        while ((iterator.hasNext())){
+            if(!DateUltilities.isSameDay(iterator.next().getDate(), date)){
+                iterator.remove();
+            }
+        }
+
+        return h;
     }
 }

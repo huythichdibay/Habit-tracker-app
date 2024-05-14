@@ -10,6 +10,7 @@ import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.habittrackerapp.R;
@@ -38,13 +39,17 @@ import java.util.List;
  */
 public class DashboardFragment extends Fragment implements OnDateClickListener {
 
+    TextView dashboardHeaderTitle;
     Date chosenDate;
     RecyclerView AnytimeRV;
     RecyclerView MorningRV;
     RecyclerView AfternoonRV;
     RecyclerView EveningRV;
     RecyclerView datePicker;
-
+    List<Habit> AnyTime ;
+    List<Habit> Morning ;
+    List<Habit> Afternoon ;
+    List<Habit> Evening ;
     DailyHabitDao dailyHabitDao;
     MonthlyHabitDao monthlyHabitDao;
     WeeklyHabitDao weeklyHabitDao;
@@ -79,6 +84,7 @@ public class DashboardFragment extends Fragment implements OnDateClickListener {
         MorningRV = view.findViewById(R.id.morning_habits);
         AfternoonRV = view.findViewById(R.id.afternoon_habits);
         EveningRV = view.findViewById(R.id.evening_habits);
+        dashboardHeaderTitle = view.findViewById(R.id.dashboard_header_title);
 
         dailyHabitDao = new DailyHabitDao(getContext());
         weeklyHabitDao = new WeeklyHabitDao(getContext());
@@ -98,7 +104,7 @@ public class DashboardFragment extends Fragment implements OnDateClickListener {
         datePicker.smoothScrollToPosition(dateList.size() - 1);
 
         reloadRV();
-
+        loadRV();
         //
         view.findViewById(R.id.btn_today).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -113,28 +119,33 @@ public class DashboardFragment extends Fragment implements OnDateClickListener {
 
     private void getAnyTimeHabitsRV(List<Habit> habits) {
         AnytimeRV.setLayoutManager(new LinearLayoutManager(getContext()));
-        AnytimeRV.setAdapter(new HabitListDashboardAdapter(habits, getContext(),chosenDate));
+        AnytimeRV.setAdapter(new HabitListDashboardAdapter(habits, getContext(),chosenDate,0));
     }
 
     private void getMorningHabitsRV(List<Habit> habits) {
         MorningRV.setLayoutManager(new LinearLayoutManager(getContext()));
-        MorningRV.setAdapter(new HabitListDashboardAdapter(habits, getContext(),chosenDate));
+        MorningRV.setAdapter(new HabitListDashboardAdapter(habits, getContext(),chosenDate,1));
     }
 
     private void getAfternoonHabitsRV(List<Habit> habits) {
         AfternoonRV.setLayoutManager(new LinearLayoutManager(getContext()));
-        AfternoonRV.setAdapter(new HabitListDashboardAdapter(habits, getContext(),chosenDate));
+        AfternoonRV.setAdapter(new HabitListDashboardAdapter(habits, getContext(),chosenDate,2));
     }
 
     private void getEveningHabitsRV(List<Habit> habits) {
         EveningRV.setLayoutManager(new LinearLayoutManager(getContext()));
-        EveningRV.setAdapter(new HabitListDashboardAdapter(habits, getContext(),chosenDate));
+        EveningRV.setAdapter(new HabitListDashboardAdapter(habits, getContext(),chosenDate,3));
     }
 
     @Override
-    public void onItemClick(int position) {
-//        Toast.makeText(getContext(), "Kasdasd", Toast.LENGTH_SHORT).show();
+    public void onItemClick(Date item) {
+        chosenDate = item;
         reloadRV();
+        if(DateUltilities.isSameDay(chosenDate, new Date())){
+            dashboardHeaderTitle.setText("Today");
+        }else {
+            dashboardHeaderTitle.setText(DateUltilities.FormatDate("dd/MM/yyyy", chosenDate));
+        }
     }
 
     private void reloadRV() {
@@ -142,11 +153,13 @@ public class DashboardFragment extends Fragment implements OnDateClickListener {
         List<Habit> daily = dailyHabitDao.DailyHabitToHabitList(dailyHabitDao.GetByDate(chosenDate));
         List<Habit> weekly = weeklyHabitDao.WeeklyHabitToHabitList(weeklyHabitDao.GetAll());
         List<Habit> monthly = monthlyHabitDao.MonthlyHabitToHabitList(monthlyHabitDao.GetByDate(chosenDate));
+        List<Habit> anyTime = habitDao.GetOneTimeTaskByDate(chosenDate);
 
         daily.addAll(weekly);
         daily.addAll(monthly);
+        daily.addAll(anyTime);
 
-        if(chosenDate.equals(new Date())){
+        if(!DateUltilities.isSameDay(chosenDate, new Date())){
             Iterator<Habit> iterator = daily.iterator();
             while (iterator.hasNext()){
                 if(!habitRecordDao.IsHabitHaveRecord(iterator.next().getId(), chosenDate)){
@@ -155,27 +168,28 @@ public class DashboardFragment extends Fragment implements OnDateClickListener {
             }
         }
 
-
-        List<Habit> AnyTime = new ArrayList<>();
-        List<Habit> Morning = new ArrayList<>();
-        List<Habit> Afternoon = new ArrayList<>();
-        List<Habit> Evening = new ArrayList<>();
+        AnyTime = new ArrayList<>();
+        Morning = new ArrayList<>();
+        Afternoon = new ArrayList<>();
+        Evening = new ArrayList<>();
 
         for (Habit h: daily) {
             if(h.getRepeatedDaily() == 0){
                 AnyTime.add(h);
-            } else if (String.valueOf(h.getRepeatedDaily()).contains("1")) {
+            }  if (String.valueOf(h.getRepeatedDaily()).contains("1")) {
                 Morning.add(h);
             }
-            else if (String.valueOf(h.getRepeatedDaily()).contains("2")) {
+             if (String.valueOf(h.getRepeatedDaily()).contains("2")) {
                 Afternoon.add(h);
             }
-            else if (String.valueOf(h.getRepeatedDaily()).contains("3")) {
+             if (String.valueOf(h.getRepeatedDaily()).contains("3")) {
                 Evening.add(h);
             }
-
         }
+        loadRV();
+    }
 
+    private void loadRV(){
         getAnyTimeHabitsRV(AnyTime);
         getMorningHabitsRV(Morning);
         getAfternoonHabitsRV(Afternoon);

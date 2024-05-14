@@ -42,14 +42,14 @@ public class DatePickerAdapter extends RecyclerView.Adapter<DatePickerViewHolder
         }else{
             holder.dayOfWeek.setText("Th " + (dates.get(position).getDay() + 1));
         }
-
+        Date dd = dates.get(position);
         holder.view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 row_index = holder.getAdapterPosition();
                 notifyDataSetChanged();
                 if(listener != null){
-                    listener.onItemClick(position);
+                    listener.onItemClick(dd);
                 }
             }
         });

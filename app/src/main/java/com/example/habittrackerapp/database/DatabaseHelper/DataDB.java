@@ -138,7 +138,7 @@ public class DataDB {
                     "(6,'10/05/2024', 0 , 'Overdue', 0)";
     private final static String INSERT_HABIT_RECORD7 =
             "INSERT INTO HabitRecords(HabitId, Date, Goal, Status, TimeInDay)" +
-                    "VALUES (6, '29/04/2024', 1, 'Done', 1);";
+                    "VALUES (7, '29/04/2024', 1, 'Done', 1);";
     public static void InsertData(SQLiteDatabase db){
         db.execSQL(INSERT_DAILY_HABITS);
         db.execSQL(INSERT_DAILY_HABITS1);

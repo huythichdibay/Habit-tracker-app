@@ -40,10 +40,39 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/done_task_lable"
+        android:text="Done Tasks"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:layout_marginTop="20dp"
+        android:textColor="@color/black_gray"
+        app:layout_constraintTop_toBottomOf="@+id/my_task_action_bar"/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:id="@+id/all_task_rv"
-        app:layout_constraintTop_toBottomOf="@+id/my_task_action_bar"
+        app:layout_constraintTop_toBottomOf="@+id/done_task_lable"
+        android:layout_marginTop="30dp"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/not_done_task_lable"
+        android:text="Overdue Tasks"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:layout_marginTop="20dp"
+        android:textColor="@color/black_gray"
+        app:layout_constraintTop_toBottomOf="@+id/all_task_rv"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:id="@+id/all_not_task_rv"
+        app:layout_constraintTop_toBottomOf="@+id/not_done_task_lable"
         android:layout_marginTop="30dp"
         android:layout_height="wrap_content"/>
 
