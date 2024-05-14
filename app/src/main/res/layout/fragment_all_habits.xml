@@ -6,56 +6,151 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragments.AllHabitsFragment">
 
-<!--    morning habits container-->
-    <RelativeLayout
-        android:id="@+id/morning_habit_container"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/all_wallet_action_bar"
+        android:background="@color/black_gray"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:layout_marginBottom="20dp"
         app:layout_constraintTop_toTopOf="parent">
 
-<!--        header-->
-        
-<!--        main content-->
+        <TextView
+            android:id="@+id/all_wallet_label"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:text="All Habits"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:textSize="30sp"
+            android:layout_marginLeft="20dp"/>
 
-    </RelativeLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-<!--    afternoon habits container-->
-    <RelativeLayout
-        android:id="@+id/afternoon_habit_container"
+    <LinearLayout
+        android:id="@+id/all_habits_choose"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="@id/morning_habit_container">
+        android:orientation="horizontal"
+        android:paddingRight="8dp"
+        android:paddingLeft="8dp"
+        android:paddingBottom="15dp"
+        android:paddingTop="15dp"
+        app:layout_constraintTop_toBottomOf="@+id/all_wallet_action_bar"
+        android:background="@color/black_gray"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="12dp">
 
-        <!--        header-->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="Habits"
+            android:textColor="@color/white"
+            android:paddingLeft="20dp"
+            android:textStyle="bold"
+            android:textSize="25sp"/>
 
-        <!--        main content-->
+        <View
+            android:layout_width="240dp"
+            android:layout_height="40dp"/>
 
-    </RelativeLayout>
+        <ImageView
+            android:layout_width="60dp"
+            android:layout_height="match_parent"
 
-<!--    evening habits container-->
-    <RelativeLayout
-        android:id="@+id/evening_habit_container"
+            android:src="@drawable/baseline_arrow_forward_24"
+            app:tint="@color/white"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/one_time_task_choose"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="@id/afternoon_habit_container">
+        android:orientation="horizontal"
+        android:paddingRight="8dp"
+        android:paddingLeft="8dp"
+        android:paddingBottom="15dp"
+        android:paddingTop="15dp"
+        app:layout_constraintTop_toBottomOf="@+id/all_habits_choose"
+        android:background="@color/black_gray"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="12dp">
 
-        <!--        header-->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="One-time Tasks"
+            android:textColor="@color/white"
+            android:paddingLeft="20dp"
+            android:textStyle="bold"
+            android:textSize="25sp"/>
 
-        <!--        main content-->
+        <View
+            android:layout_width="135dp"
+            android:layout_height="40dp"/>
 
-    </RelativeLayout>
+        <ImageView
+            android:layout_width="60dp"
+            android:layout_height="match_parent"
 
-<!--    any time habits container-->
-    <RelativeLayout
-        android:id="@+id/anytime_habit_container"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="@id/evening_habit_container">
+            android:src="@drawable/baseline_arrow_forward_24"
+            app:tint="@color/white"/>
+    </LinearLayout>
 
-        <!--        header-->
+<!--    morning habits container-->
+<!--    <RelativeLayout-->
+<!--        android:id="@+id/morning_habit_container"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        app:layout_constraintTop_toTopOf="parent">-->
 
-        <!--        main content-->
+<!--&lt;!&ndash;        header&ndash;&gt;-->
+<!--        -->
+<!--&lt;!&ndash;        main content&ndash;&gt;-->
 
-    </RelativeLayout>
+<!--    </RelativeLayout>-->
+
+<!--&lt;!&ndash;    afternoon habits container&ndash;&gt;-->
+<!--    <RelativeLayout-->
+<!--        android:id="@+id/afternoon_habit_container"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        app:layout_constraintTop_toTopOf="@id/morning_habit_container">-->
+
+<!--        &lt;!&ndash;        header&ndash;&gt;-->
+
+<!--        &lt;!&ndash;        main content&ndash;&gt;-->
+
+<!--    </RelativeLayout>-->
+
+<!--&lt;!&ndash;    evening habits container&ndash;&gt;-->
+<!--    <RelativeLayout-->
+<!--        android:id="@+id/evening_habit_container"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        app:layout_constraintTop_toTopOf="@id/afternoon_habit_container">-->
+
+<!--        &lt;!&ndash;        header&ndash;&gt;-->
+
+<!--        &lt;!&ndash;        main content&ndash;&gt;-->
+
+<!--    </RelativeLayout>-->
+
+<!--&lt;!&ndash;    any time habits container&ndash;&gt;-->
+<!--    <RelativeLayout-->
+<!--        android:id="@+id/anytime_habit_container"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        app:layout_constraintTop_toTopOf="@id/evening_habit_container">-->
+
+<!--        &lt;!&ndash;        header&ndash;&gt;-->
+
+<!--        &lt;!&ndash;        main content&ndash;&gt;-->
+
+<!--    </RelativeLayout>-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

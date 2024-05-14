@@ -6,7 +6,7 @@ public class HabitRecord {
     int Id;
     int HabitId;
     Date Date;
-    String Status; // Overdue, Done, Not Yet, In Progress
+    String Status; //  Not Yet,  In Progress,  Done,  Overdue
     int Goal; //so lan lam duoc
     int TimeInDay; //1 morning, 2 afternoon, 3 evening
 

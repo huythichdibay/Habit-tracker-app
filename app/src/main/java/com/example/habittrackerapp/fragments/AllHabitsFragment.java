@@ -1,5 +1,6 @@
 package com.example.habittrackerapp.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -9,6 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.habittrackerapp.R;
+import com.example.habittrackerapp.activities.AllHabitActivity;
+import com.example.habittrackerapp.activities.AllTasksActivity;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -60,7 +63,25 @@ public class AllHabitsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_all_habits, container, false);
+
+        view.findViewById(R.id.all_habits_choose).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), AllHabitActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        view.findViewById(R.id.one_time_task_choose).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), AllTasksActivity.class);
+                startActivity(intent);
+            }
+        });
+
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_all_habits, container, false);
+        return view;
     }
 }

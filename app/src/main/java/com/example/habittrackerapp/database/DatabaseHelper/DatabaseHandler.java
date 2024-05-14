@@ -45,7 +45,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                     "HabitId INTEGER REFERENCES Habits (Id)," +
                     "Date TEXT NOT NULL," +
                     "Goal INTEGER NOT NULL, " +
-                    "Status INTEGER NOT NULL);";
+                    "Status TEXT NOT NULL," +
+                    "TimeInDay INTEGER NOT NULL);";
 
     @Override
     public void onCreate(SQLiteDatabase db) {

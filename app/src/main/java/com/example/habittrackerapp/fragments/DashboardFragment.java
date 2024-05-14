@@ -6,17 +6,29 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.habittrackerapp.R;
+import com.example.habittrackerapp.database.DAOs.DailyHabitDao;
+import com.example.habittrackerapp.database.DAOs.HabitDao;
+import com.example.habittrackerapp.database.DAOs.HabitRecordDao;
+import com.example.habittrackerapp.database.DAOs.MonthlyHabitDao;
+import com.example.habittrackerapp.database.DAOs.WeeklyHabitDao;
+import com.example.habittrackerapp.interfaces.OnDateClickListener;
+import com.example.habittrackerapp.models.Habit;
 import com.example.habittrackerapp.recyclerViews.datePicker.DatePickerAdapter;
+import com.example.habittrackerapp.recyclerViews.habitList.HabitListAdapter;
+import com.example.habittrackerapp.recyclerViews.habitList_dashboard.HabitListDashboardAdapter;
 import com.example.habittrackerapp.ultilities.DateUltilities;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -24,35 +36,27 @@ import java.util.List;
  * Use the {@link DashboardFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class DashboardFragment extends Fragment {
+public class DashboardFragment extends Fragment implements OnDateClickListener {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    Date chosenDate;
+    RecyclerView AnytimeRV;
+    RecyclerView MorningRV;
+    RecyclerView AfternoonRV;
+    RecyclerView EveningRV;
+    RecyclerView datePicker;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    DailyHabitDao dailyHabitDao;
+    MonthlyHabitDao monthlyHabitDao;
+    WeeklyHabitDao weeklyHabitDao;
+    HabitDao habitDao;
+    HabitRecordDao habitRecordDao;
 
     public DashboardFragment() {
         // Required empty public constructor
     }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment DashboardFragment.
-     */
-    // TODO: Rename and change types and number of parameters
     public static DashboardFragment newInstance(String param1, String param2) {
         DashboardFragment fragment = new DashboardFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
     }
@@ -60,29 +64,121 @@ public class DashboardFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        if(chosenDate == null){
+            chosenDate = new Date();
+        }
+
         View view = inflater.inflate(R.layout.fragment_dashboard, container, false);
 
-        //wallet recycler view
-        RecyclerView walletListRV = view.findViewById(R.id.date_picker);
+        AnytimeRV = view.findViewById(R.id.do_anytime_habits);
+        MorningRV = view.findViewById(R.id.morning_habits);
+        AfternoonRV = view.findViewById(R.id.afternoon_habits);
+        EveningRV = view.findViewById(R.id.evening_habits);
+
+        dailyHabitDao = new DailyHabitDao(getContext());
+        weeklyHabitDao = new WeeklyHabitDao(getContext());
+        monthlyHabitDao = new MonthlyHabitDao(getContext());
+        habitDao = new HabitDao(getContext());
+        habitRecordDao = new HabitRecordDao(getContext());
+        //date recycler view
+        datePicker = view.findViewById(R.id.date_picker);
 
         List<Date> dateList = DateUltilities.GetDateListOf2RecentWeek();
 
         LinearLayoutManager linearLayoutManager =
                 new LinearLayoutManager(this.getContext(), LinearLayoutManager.HORIZONTAL, false);
 
-        walletListRV.setLayoutManager(linearLayoutManager);
-        walletListRV.setAdapter(new DatePickerAdapter( dateList));
+        datePicker.setLayoutManager(linearLayoutManager);
+        datePicker.setAdapter(new DatePickerAdapter(dateList, this::onItemClick));
+        datePicker.smoothScrollToPosition(dateList.size() - 1);
+
+        reloadRV();
+
+        //
+        view.findViewById(R.id.btn_today).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                datePicker.smoothScrollToPosition(20 - 1);
+            }
+        });
 
         // Inflate the layout for this fragment
         return view;
+    }
+
+    private void getAnyTimeHabitsRV(List<Habit> habits) {
+        AnytimeRV.setLayoutManager(new LinearLayoutManager(getContext()));
+        AnytimeRV.setAdapter(new HabitListDashboardAdapter(habits, getContext(),chosenDate));
+    }
+
+    private void getMorningHabitsRV(List<Habit> habits) {
+        MorningRV.setLayoutManager(new LinearLayoutManager(getContext()));
+        MorningRV.setAdapter(new HabitListDashboardAdapter(habits, getContext(),chosenDate));
+    }
+
+    private void getAfternoonHabitsRV(List<Habit> habits) {
+        AfternoonRV.setLayoutManager(new LinearLayoutManager(getContext()));
+        AfternoonRV.setAdapter(new HabitListDashboardAdapter(habits, getContext(),chosenDate));
+    }
+
+    private void getEveningHabitsRV(List<Habit> habits) {
+        EveningRV.setLayoutManager(new LinearLayoutManager(getContext()));
+        EveningRV.setAdapter(new HabitListDashboardAdapter(habits, getContext(),chosenDate));
+    }
+
+    @Override
+    public void onItemClick(int position) {
+//        Toast.makeText(getContext(), "Kasdasd", Toast.LENGTH_SHORT).show();
+        reloadRV();
+    }
+
+    private void reloadRV() {
+
+        List<Habit> daily = dailyHabitDao.DailyHabitToHabitList(dailyHabitDao.GetByDate(chosenDate));
+        List<Habit> weekly = weeklyHabitDao.WeeklyHabitToHabitList(weeklyHabitDao.GetAll());
+        List<Habit> monthly = monthlyHabitDao.MonthlyHabitToHabitList(monthlyHabitDao.GetByDate(chosenDate));
+
+        daily.addAll(weekly);
+        daily.addAll(monthly);
+
+        if(chosenDate.equals(new Date())){
+            Iterator<Habit> iterator = daily.iterator();
+            while (iterator.hasNext()){
+                if(!habitRecordDao.IsHabitHaveRecord(iterator.next().getId(), chosenDate)){
+                    iterator.remove();
+                }
+            }
+        }
+
+
+        List<Habit> AnyTime = new ArrayList<>();
+        List<Habit> Morning = new ArrayList<>();
+        List<Habit> Afternoon = new ArrayList<>();
+        List<Habit> Evening = new ArrayList<>();
+
+        for (Habit h: daily) {
+            if(h.getRepeatedDaily() == 0){
+                AnyTime.add(h);
+            } else if (String.valueOf(h.getRepeatedDaily()).contains("1")) {
+                Morning.add(h);
+            }
+            else if (String.valueOf(h.getRepeatedDaily()).contains("2")) {
+                Afternoon.add(h);
+            }
+            else if (String.valueOf(h.getRepeatedDaily()).contains("3")) {
+                Evening.add(h);
+            }
+
+        }
+
+        getAnyTimeHabitsRV(AnyTime);
+        getMorningHabitsRV(Morning);
+        getAfternoonHabitsRV(Afternoon);
+        getEveningHabitsRV(Evening);
     }
 }

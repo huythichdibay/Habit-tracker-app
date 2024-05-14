@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.AllHabitActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/my_action_bar"
+        android:background="@color/black_gray"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:layout_marginBottom="20dp"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:id="@+id/habit_exit_btn"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginLeft="5dp"
+            android:src="@drawable/baseline_arrow_back_24"/>
+
+        <TextView
+            android:id="@+id/label"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toRightOf="@+id/habit_exit_btn"
+            android:text="Habits"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:textSize="30sp"
+            android:layout_marginLeft="20dp"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/morning_habits_title1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/my_action_bar"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:text="MORNING HABITS"
+        android:layout_marginTop="15dp"
+        android:textColor="@color/black_gray"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:id="@+id/all_morning_habit_rv"
+        app:layout_constraintTop_toBottomOf="@+id/morning_habits_title1"
+        android:layout_marginTop="15dp"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/afternoon_habits_title1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/all_morning_habit_rv"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:text="AFTERNOON HABITS"
+        android:layout_marginTop="15dp"
+        android:textColor="@color/black_gray"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:id="@+id/all_afternoon_habit_rv"
+        app:layout_constraintTop_toBottomOf="@+id/afternoon_habits_title1"
+        android:layout_marginTop="15dp"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/evening_habits_title1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/all_afternoon_habit_rv"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:text="EVENING HABITS"
+        android:layout_marginTop="15dp"
+        android:textColor="@color/black_gray"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:id="@+id/all_evening_habit_rv"
+        app:layout_constraintTop_toBottomOf="@+id/evening_habits_title1"
+        android:layout_marginTop="15dp"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/anytime_habits_title1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/all_evening_habit_rv"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:text="DO-ANYTIME HABITS"
+        android:layout_marginTop="15dp"
+        android:textColor="@color/black_gray"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:id="@+id/all_anytime_habit_rv"
+        app:layout_constraintTop_toBottomOf="@+id/anytime_habits_title1"
+        android:layout_marginTop="15dp"
+        android:layout_height="wrap_content"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
